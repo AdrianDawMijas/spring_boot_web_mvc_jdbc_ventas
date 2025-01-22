@@ -56,17 +56,25 @@
         </div>
     </div>
 
-    <div>
-        <label  style="font-weight: bold; font-size: 16px; margin-bottom: 8px; display: block;">Pedidos:</label>
-        <div th:each="pedido : ${pedidos}" style="margin-bottom: 12px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background-color: #f9f9f9;">
-            <p style="margin: 0; font-size: 14px; color: #333;">
-                <span style="font-weight: bold;">Total:</span> <span th:text="${pedido.total}"></span>
-            </p>
-            <p style="margin: 0; font-size: 14px; color: #555;">
-                <span style="font-weight: bold;">Fecha:</span> <span th:text="${pedido.fecha}"></span>
-            </p>
+    <div th:each="pedido : ${pedidos}">
+        <div>
+            <!-- Nombre del cliente como enlace -->
+            <span style="font-weight: bold;">Cliente:</span>
+            <a th:href="@{/clientes/{id}(id=${pedido.id_cliente})}"
+               th:text="${clienteNombreMap[pedido.id_cliente] ?: 'Cliente desconocido'}">
+
+            </a>
         </div>
+        <!-- Detalles del pedido -->
+        <p style="margin: 0; font-size: 14px; color: #333;">
+            <span style="font-weight: bold;">Total:</span> <span th:text="${pedido.total}"></span>
+        </p>
+        <p style="margin: 0; font-size: 14px; color: #555;">
+            <span style="font-weight: bold;">Fecha:</span> <span th:text="${pedido.fecha}"></span>
+        </p>
     </div>
+
+
 
 </div>
 

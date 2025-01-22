@@ -1,6 +1,10 @@
 package org.iesvdm.controlador;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.iesvdm.modelo.Cliente;
 import org.iesvdm.modelo.Comercial;
@@ -26,6 +30,9 @@ public class ComercialController {
     @Autowired
     private PedidoService pedidoService;
 
+    @Autowired
+    private ClienteService clienteService;
+
     @GetMapping("/comerciales")
     public String listar(Model model) {
 
@@ -42,6 +49,25 @@ public class ComercialController {
         Comercial comercial = comercialService.one(id);
         List<Pedido> pedidos = pedidoService.listAll().stream()
                 .filter(pedido1 -> pedido1.getId_comercial()==id).toList();
+
+        // Crear un mapa de ID de cliente a nombre
+        Map<Integer, String> clienteNombreMap = new HashMap<>();
+        pedidos.forEach(pedido -> {
+            Integer clienteId = pedido.getId_cliente();
+            if (!clienteNombreMap.containsKey(clienteId)) {
+                Cliente cliente = clienteService.one(clienteId); // Llamada individual
+                if (cliente != null) {
+                    clienteNombreMap.put(clienteId, cliente.getNombre());
+                } else {
+                    clienteNombreMap.put(clienteId, "Cliente desconocido");
+                }
+            }
+        });
+
+
+        System.out.println("Contenido de clienteNombreMap: " + clienteNombreMap);
+
+        model.addAttribute("clienteNombreMap", clienteNombreMap);
         model.addAttribute("comercial", comercial);
         model.addAttribute("pedidos",pedidos);
 
