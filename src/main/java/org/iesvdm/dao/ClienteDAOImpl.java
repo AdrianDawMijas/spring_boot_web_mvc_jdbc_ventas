@@ -29,8 +29,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 	 */
 	@Override	
 	public synchronized void create(Cliente cliente) {
-		
-							//Desde java15+ se tiene la triple quote """ para bloques de texto como cadenas.
+
 		String sqlInsert = """
 							INSERT INTO cliente (nombre, apellido1, apellido2, ciudad, categoría) 
 							VALUES  (     ?,         ?,         ?,       ?,         ?)
@@ -50,15 +49,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 		},keyHolder);
 		
 		cliente.setId(keyHolder.getKey().intValue());
-		
-		//Sin recuperación de id generado
-//		int rows = jdbcTemplate.update(sqlInsert,
-//							cliente.getNombre(),
-//							cliente.getApellido1(),
-//							cliente.getApellido2(),
-//							cliente.getCiudad(),
-//							cliente.getCategoria()
-//					);
+
 
 		log.info("Insertados {} registros.", rows);
 	}
@@ -140,10 +131,11 @@ public class ClienteDAOImpl implements ClienteDAO {
 	 */
 	@Override
 	public void delete(long id) {
-		
+
+		int rows0 = jdbcTemplate.update("DELETE FROM pedido where id_cliente = ?", id);
 		int rows = jdbcTemplate.update("DELETE FROM cliente WHERE id = ?", id);
-		
-		log.info("Delete de Cliente con {} registros eliminados.", rows);		
+		int rowsFinal = rows0+rows;
+		log.info("Delete de Cliente con {} registros eliminados.", rowsFinal);
 		
 	}
 	
