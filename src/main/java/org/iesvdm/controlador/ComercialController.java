@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.iesvdm.modelo.Cliente;
 import org.iesvdm.modelo.Comercial;
+import org.iesvdm.modelo.Pedido;
 import org.iesvdm.service.ClienteService;
 import org.iesvdm.service.ComercialService;
+import org.iesvdm.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,9 @@ public class ComercialController {
     @Autowired
     private ComercialService comercialService;
 
+    @Autowired
+    private PedidoService pedidoService;
+
     @GetMapping("/comerciales")
     public String listar(Model model) {
 
@@ -35,7 +40,10 @@ public class ComercialController {
     public String detalle(Model model, @PathVariable Integer id ) {
 
         Comercial comercial = comercialService.one(id);
+        List<Pedido> pedidos = pedidoService.listAll().stream()
+                .filter(pedido1 -> pedido1.getId_comercial()==id).toList();
         model.addAttribute("comercial", comercial);
+        model.addAttribute("pedidos",pedidos);
 
         return "detalle-comercial";
 
