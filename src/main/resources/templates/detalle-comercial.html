@@ -10,9 +10,9 @@
 <body>
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">Detalle Comercial</h1>
+        <h1 class="h3" th:text="#{detalle_comercial}"></h1>
         <form action="/comerciales">
-            <button class="btn btn-secondary" type="submit">Volver</button>
+            <button class="btn btn-secondary" type="submit" th:text="#{volver}"></button>
         </form>
     </div>
 
@@ -26,7 +26,7 @@
 
     <!-- Campo Nombre -->
     <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Nombre</label>
+        <label class="col-sm-2 col-form-label" th:text="#{nombre}"></label>
         <div class="col-sm-10">
             <input type="text" th:value="${comercial.nombre}" class="form-control-plaintext" readonly="readonly" />
         </div>
@@ -34,7 +34,7 @@
 
     <!-- Campo Precio -->
     <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Primer Apellido</label>
+        <label class="col-sm-2 col-form-label" th:text="#{apellido1}"></label>
         <div class="col-sm-10">
             <input type="text" th:value="${comercial.apellido1}" class="form-control-plaintext" readonly="readonly" />
         </div>
@@ -42,7 +42,7 @@
 
     <!-- Campo ID Fabricante -->
     <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Segundo Apellido:</label>
+        <label class="col-sm-2 col-form-label" th:text="#{apellido2}"></label>
         <div class="col-sm-10">
             <input type="text" th:value="${comercial.apellido2}" class="form-control-plaintext" readonly="readonly" />
         </div>
@@ -50,7 +50,7 @@
 
     <!-- Campo ID Fabricante -->
     <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Comision</label>
+        <label class="col-sm-2 col-form-label" th:text="#{comision}"></label>
         <div class="col-sm-10">
             <input type="text" th:value="${comercial.comision}" class="form-control-plaintext" readonly="readonly" />
         </div>
@@ -59,7 +59,7 @@
     <div th:each="pedido : ${pedidos}">
         <div>
             <!-- Nombre del cliente como enlace -->
-            <span style="font-weight: bold;">Cliente:</span>
+            <span style="font-weight: bold;" th:text="#{cliente}">Cliente:</span>
             <a th:href="@{/clientes/{id}(id=${pedido.id_cliente})}"
                th:text="${clienteNombreMap[pedido.id_cliente] ?: 'Cliente desconocido'}">
 

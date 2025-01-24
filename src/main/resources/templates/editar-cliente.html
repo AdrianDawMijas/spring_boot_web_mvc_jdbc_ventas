@@ -10,14 +10,14 @@
 <div class="container mt-5">
     <form th:action="@{/clientes/editar/__${cliente.id}__}" th:object="${cliente}" method="post" class="border p-4 rounded shadow">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="h3">Editar Cliente</h1>
+            <h1 class="h3" th:text="#{editar_cliente}"></h1>
             <!-- Button de guardar -->
-            <button class="btn btn-primary" type="submit">Guardar</button>
+            <button class="btn btn-primary" type="submit" th:text="#{guardar}"></button>
         </div>
 
         <!-- Campo Nombre -->
         <div class="mb-3 row">
-            <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+            <label for="nombre" class="col-sm-2 col-form-label" th:text="#{nombre}"></label>
             <div class="col-sm-10">
                 <input type="text" id="nombre" th:field="*{nombre}" class="form-control" />
             </div>
@@ -25,7 +25,7 @@
 
         <!-- Campo Apellido1 -->
         <div class="mb-3 row">
-            <label for="apellido1" class="col-sm-2 col-form-label">Primer Apellido: </label>
+            <label for="apellido1" class="col-sm-2 col-form-label" th:text="#{apellido1}"></label>
             <div class="col-sm-10">
                 <input type="text" id="apellido1" th:field="*{apellido1}" class="form-control" />
             </div>
@@ -33,7 +33,7 @@
 
         <!-- Campo Apellido2 -->
         <div class="mb-3 row">
-            <label for="apellido2" class="col-sm-2 col-form-label">Segundo Apellido:</label>
+            <label for="apellido2" class="col-sm-2 col-form-label" th:text="#{apellido2}"></label>
             <div class="col-sm-10">
                 <input type="text" id="apellido2" th:field="*{apellido2}" class="form-control" />
             </div>
@@ -41,7 +41,7 @@
 
         <!-- Campo ciudad -->
         <div class="mb-3 row" >
-            <label for="ciudad" class="col-sm-2 col-form-label">Ciudad:</label>
+            <label for="ciudad" class="col-sm-2 col-form-label" th:text="#{ciudad}"></label>
             <div class="col-sm-10">
                 <input type="text" id="ciudad" th:field="*{ciudad}" class="form-control" required />
             </div>
@@ -49,7 +49,7 @@
 
         <!-- Campo categoria -->
         <div class="mb-3 row">
-            <label for="categoria" class="col-sm-2 col-form-label">Categoría:</label>
+            <label for="categoria" class="col-sm-2 col-form-label"th:text="#{categoria}"></label>
             <div class="col-sm-10">
                 <input type="text" id="categoria" th:field="*{categoria}" class="form-control" required />
             </div>

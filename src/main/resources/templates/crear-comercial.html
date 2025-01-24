@@ -11,32 +11,32 @@
 <div class="container mt-5">
     <form th:action="@{/comerciales/crear}" th:object="${comercial}" method="post" class="border p-4 rounded shadow">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="h3">Crear Comercial</h1>
+            <h1 class="h3" th:text="#{crear_comercial}"></h1>
             <!-- Button de guardar -->
-            <button class="btn btn-primary" type="submit">Guardar</button>
+            <button class="btn btn-primary" type="submit" th:text="#{guardar}"></button>
         </div>
 
         <!-- Campo Nombre -->
         <div class="mb-3">
-            <label for="nombre" class="form-label mt-2">Nombre:</label>
+            <label for="nombre" class="form-label mt-2" th:text="#{nombre}+':'"></label>
             <input type="text" id="nombre" th:field="*{nombre}" class="form-control" required />
         </div>
 
         <!-- Campo Apellido1 -->
         <div class="mb-3">
-            <label for="apellido1" class="form-label">Primer Apellido:</label>
+            <label for="apellido1" class="form-label" th:text="#{apellido1}+':'"></label>
             <input type="text" id="apellido1" th:field="*{apellido1}" class="form-control" required />
         </div>
 
         <!-- Campo Apellido2 -->
         <div class="mb-3">
-            <label for="apellido2" class="form-label">Segundo Apellido:</label>
+            <label for="apellido2" class="form-label" th:text="#{apellido2}+':'"></label>
             <input type="text" id="apellido2" th:field="*{apellido2}" class="form-control" required />
         </div>
 
         <!-- Campo comision -->
         <div class="mb-3">
-            <label for="comisión" class="form-label">Comisión:</label>
+            <label for="comisión" class="form-label" th:text="#{comision}+':'"></label>
             <input type="text" id="comisión" th:field="*{comision}" class="form-control" required />
         </div>
 
