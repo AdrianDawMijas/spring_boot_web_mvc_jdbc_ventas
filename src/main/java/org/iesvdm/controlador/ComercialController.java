@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.iesvdm.modelo.Cliente;
 import org.iesvdm.modelo.Comercial;
+import org.iesvdm.modelo.ComercialDTO;
 import org.iesvdm.modelo.Pedido;
 import org.iesvdm.service.ClienteService;
 import org.iesvdm.service.ComercialService;
@@ -45,31 +46,12 @@ public class ComercialController {
 
     @GetMapping("/comerciales/{id}")
     public String detalle(Model model, @PathVariable Integer id ) {
+        ComercialDTO dto = comercialService.getComercialDTOs()
+                                                            .stream().filter(comercialDTO -> comercialDTO.getComercial()
+                                                            .getId() == id)
+                                                            .findFirst().orElse(null);
 
-        Comercial comercial = comercialService.one(id);
-        List<Pedido> pedidos = pedidoService.listAll().stream()
-                .filter(pedido1 -> pedido1.getId_comercial()==id).toList();
-
-        // Crear un mapa de ID de cliente a nombre
-        Map<Integer, String> clienteNombreMap = new HashMap<>();
-        pedidos.forEach(pedido -> {
-            Integer clienteId = pedido.getId_cliente();
-            if (!clienteNombreMap.containsKey(clienteId)) {
-                Cliente cliente = clienteService.one(clienteId); // Llamada individual
-                if (cliente != null) {
-                    clienteNombreMap.put(clienteId, cliente.getNombre());
-                } else {
-                    clienteNombreMap.put(clienteId, "Cliente desconocido");
-                }
-            }
-        });
-
-
-        System.out.println("Contenido de clienteNombreMap: " + clienteNombreMap);
-
-        model.addAttribute("clienteNombreMap", clienteNombreMap);
-        model.addAttribute("comercial", comercial);
-        model.addAttribute("pedidos",pedidos);
+        model.addAttribute("dto", dto);
 
         return "detalle-comercial";
 

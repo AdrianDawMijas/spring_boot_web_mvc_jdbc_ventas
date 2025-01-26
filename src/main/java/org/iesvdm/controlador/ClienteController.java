@@ -3,6 +3,7 @@ package org.iesvdm.controlador;
 import java.util.List;
 
 import org.iesvdm.modelo.Cliente;
+import org.iesvdm.modelo.ClienteDTO;
 import org.iesvdm.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ public class ClienteController {
 	@GetMapping("/clientes")
 	public String listar(Model model) {
 
-		List<Cliente> listAllCli =  clienteService.listAll();
+		List<ClienteDTO> listAllCli =  clienteService.listClientesDTOs();
 		model.addAttribute("listaClientes", listAllCli);
 
 		return "clientes";

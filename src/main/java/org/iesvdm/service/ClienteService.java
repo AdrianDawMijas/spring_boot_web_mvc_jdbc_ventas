@@ -1,8 +1,10 @@
 package org.iesvdm.service;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.iesvdm.dao.ClienteDAO;
 import org.iesvdm.modelo.Cliente;
+import org.iesvdm.modelo.ClienteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,9 @@ public class ClienteService {
 
 	@Autowired
 	private ClienteDAO clienteDAO;
+
+	@Autowired
+	private PedidoService pedidoService;
 
 	public List<Cliente> listAll() {
 
@@ -39,6 +44,21 @@ public class ClienteService {
 
 		clienteDAO.delete(id);
 
+	}
+
+	public List<ClienteDTO> listClientesDTOs(){
+
+		List<Cliente> clientes = clienteDAO.getAll();
+		List<ClienteDTO> clientesDTOs = new ArrayList<ClienteDTO>();
+		for(Cliente cliente : clientes){
+			ClienteDTO clienteDTO = new ClienteDTO();
+			clienteDTO.setCliente(cliente);
+			clienteDTO.setCantidadPedidos(pedidoService.listAll()
+					.stream().filter(pedido -> pedido.getId_cliente()==cliente.getId())
+					.toList().size());
+			clientesDTOs.add(clienteDTO);
+		}
+		return clientesDTOs;
 	}
 
 }

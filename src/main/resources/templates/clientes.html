@@ -39,23 +39,45 @@
 				</thead>
 				<tbody class="text-center align-middle">
 				<tr th:each="cliente : ${listaClientes}">
-					<td th:text="${cliente.id}">1</td>
-					<td th:text="${cliente.nombre}">Nombre</td>
-					<td th:text="${cliente.apellido1}">Apellido1</td>
-					<td th:text="${cliente.apellido2 ?: '&nbsp;'}">Apellido2</td>
-					<td th:text="${cliente.ciudad}">Ciudad</td>
-					<td th:text="${cliente.categoria}">Categoría</td>
+					<td th:text="${cliente.getCliente().getId()}">1</td>
+					<td th:text="${cliente.getCliente().getNombre()}">Nombre</td>
+					<td th:text="${cliente.getCliente().getApellido1()}">Apellido1</td>
+					<td th:text="${cliente.getCliente().getApellido2() ?: '&nbsp;'}">Apellido2</td>
+					<td th:text="${cliente.getCliente().getCiudad()}">Ciudad</td>
+					<td th:text="${cliente.getCliente().getCategoria()}">Categoría</td>
 					<td class="table-actions">
-						<form th:action="@{/clientes/__${cliente.id}__}" class="d-inline">
+						<form th:action="@{/clientes/__${cliente.getCliente().getId()}__}" class="d-inline">
 							<button type="submit" class="btn btn-info btn-sm">Ver Detalle</button>
 						</form>
-						<form th:action="@{/clientes/editar/__${cliente.id}__}" class="d-inline">
+						<form th:action="@{/clientes/editar/__${cliente.getCliente().getId()}__}" class="d-inline">
 							<button type="submit" class="btn btn-warning btn-sm">Editar</button>
 						</form>
-						<form th:action="@{/clientes/borrar/__${cliente.id}__}" method="post" class="d-inline">
+						<form th:action="@{/clientes/borrar/__${cliente.getCliente().getId()}__}" method="post" class="d-inline">
 							<button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
 						</form>
 					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row mt-4">
+		<div class="col-12">
+			<table class="table table-striped table-hover">
+				<thead class="table-dark text-center">
+				<tr>
+					<th>Nombre</th>
+					<th>Apellido1</th>
+					<th>Apellido2</th>
+					<th>Cantidad Pedidos</th>
+				</tr>
+				</thead>
+				<tbody class="text-center align-middle">
+				<tr th:each="cliente : ${listaClientes}">
+					<td th:text="${cliente.getCliente().getNombre()}">Nombre</td>
+					<td th:text="${cliente.getCliente().getApellido1()}">Apellido1</td>
+					<td th:text="${cliente.getCliente().getApellido2() ?: '&nbsp;'}">Apellido2</td>
+					<td th:text="${cliente.getCantidadPedidos()}">Cantidad Pedidos</td>
 				</tr>
 				</tbody>
 			</table>
