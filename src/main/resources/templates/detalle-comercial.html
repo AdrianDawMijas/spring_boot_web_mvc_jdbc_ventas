@@ -16,84 +16,97 @@
         </form>
     </div>
 
-    <!-- Campo ID -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">ID</label>
-        <div class="col-sm-10">
-            <input type="text" th:value="${dto.getComercial().getId()}" class="form-control-plaintext" readonly="readonly" />
+    <!-- Información del comercial -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h2 class="h5 mb-3">Información del Comercial</h2>
+            <div class="row mb-2">
+                <label class="col-sm-3 fw-bold">ID:</label>
+                <div class="col-sm-9">
+                    <span th:text="${dto.getComercial().getId()}"></span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-sm-3 fw-bold">Nombre:</label>
+                <div class="col-sm-9">
+                    <span th:text="${dto.getComercial().getNombre()}"></span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-sm-3 fw-bold">Primer Apellido:</label>
+                <div class="col-sm-9">
+                    <span th:text="${dto.getComercial().getApellido1()}"></span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-sm-3 fw-bold">Segundo Apellido:</label>
+                <div class="col-sm-9">
+                    <span th:text="${dto.getComercial().getApellido2()}"></span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-sm-3 fw-bold">Comisión:</label>
+                <div class="col-sm-9">
+                    <span th:text="${dto.getComercial().getComision()}"></span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-sm-3 fw-bold">Media total de productos:</label>
+                <div class="col-sm-9">
+                    <span th:text="${dto.getMedia()}"></span>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Campo Nombre -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Nombre</label>
-        <div class="col-sm-10">
-            <input type="text" th:value="${dto.getComercial().getNombre()}" class="form-control-plaintext" readonly="readonly" />
-        </div>
-    </div>
-
-    <!-- Campo Precio -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Primer Apellido</label>
-        <div class="col-sm-10">
-            <input type="text" th:value="${dto.getComercial().getApellido1()}" class="form-control-plaintext" readonly="readonly" />
-        </div>
-    </div>
-
-    <!-- Campo ID Fabricante -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Segundo Apellido:</label>
-        <div class="col-sm-10">
-            <input type="text" th:value="${dto.getComercial().getApellido2()}" class="form-control-plaintext" readonly="readonly" />
-        </div>
-    </div>
-
-    <!-- Campo ID Comision -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Comision</label>
-        <div class="col-sm-10">
-            <input type="text" th:value="${dto.getComercial().getComision()}" class="form-control-plaintext" readonly="readonly" />
-        </div>
-    </div>
-
-    <!-- Campo ID Media -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Media total de productos</label>
-        <div class="col-sm-10">
-            <input type="text" th:value="${dto.getMedia()}" class="form-control-plaintext" readonly="readonly" />
-        </div>
-    </div>
-
-
-
+    <!-- Pedidos -->
+    <h2 class="h4 mb-4">Pedidos</h2>
     <div th:if="${dto != null and dto.getPedidos() != null}" th:each="pedido : ${dto.getPedidos()}">
-        <div>
-            <!-- Nombre del cliente como enlace -->
-            <span style="font-weight: bold;">Cliente:</span>
-
-            <a th:if="${pedido.getCliente() != null}"
-               th:href="@{/clientes/{id}(id=${pedido.getCliente().getId()})}"
-               th:text="${pedido.getCliente().getNombre()}">
-            </a>
-            <span th:if="${pedido.getCliente() == null}" style="color: gray;">Cliente no disponible</span>
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <!-- Cliente -->
+                <div class="row mb-2">
+                    <div class="col-sm-2 fw-bold">Cliente:</div>
+                    <div class="col-sm-10">
+                        <a th:if="${pedido.getCliente() != null}"
+                           th:href="@{/clientes/{id}(id=${pedido.getCliente().getId()})}"
+                           class="text-primary text-decoration-none"
+                           th:text="${pedido.getCliente().getNombre()}">
+                        </a>
+                        <span th:if="${pedido.getCliente() == null}" class="text-muted">Cliente no disponible</span>
+                    </div>
+                </div>
+                <!-- Total -->
+                <div class="row mb-2">
+                    <div class="col-sm-2 fw-bold">Total:</div>
+                    <div class="col-sm-10">
+                <span th:class="${pedido.getPedido().getTotal() == dto.getMaximo() ? 'bg-success' :
+                  (pedido.getPedido().getTotal() == dto.getMinimo() ? 'bg-warning' : 'bg-white')}"
+                      th:text="${pedido.getPedido().getTotal()}"></span>
+                    </div>
+                </div>
+                <!-- Fecha -->
+                <div class="row">
+                    <div class="col-sm-2 fw-bold">Fecha:</div>
+                    <div class="col-sm-10">
+                        <span th:text="${pedido.getPedido().getFecha()}"></span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- Detalles del pedido -->
-        <p style="margin: 0; font-size: 14px;"
-           th:class="${pedido.getPedido().getTotal() == dto.getMaximo() ? 'text-success' :
-              (pedido.getPedido().getTotal() == dto.getMinimo() ? 'text-warning' : 'text-dark')}">
-            <span style="font-weight: bold;">Total:</span>
-            <span th:text="${pedido.getPedido().getTotal()}"></span>
-        </p>
-        <p style="margin: 0; font-size: 14px; color: #555;">
-            <span style="font-weight: bold;">Fecha:</span> <span th:text="${pedido.getPedido().getFecha()}"></span>
-        </p>
+
     </div>
 
-    <div class="legend mb-3 mt-4" >
-        <span style="font-weight: bold;">Leyenda:</span>
-        <ul class="list-unstyled">
-            <li><span style="color: green; font-weight: bold;">●</span> Total máximo</li>
-            <li><span style="color: orange; font-weight: bold;">●</span> Total mínimo</li>
+    <!-- Leyenda -->
+    <div class="mt-4">
+        <h5 class="fw-bold">Leyenda:</h5>
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <span class="badge bg-success">●</span> Total máximo
+            </li>
+            <li class="list-inline-item">
+                <span class="badge bg-warning">●</span> Total mínimo
+            </li>
         </ul>
     </div>
 </div>
