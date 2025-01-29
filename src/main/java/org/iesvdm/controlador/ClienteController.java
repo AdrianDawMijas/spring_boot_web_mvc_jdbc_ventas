@@ -3,6 +3,7 @@ package org.iesvdm.controlador;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.validation.Valid;
 import org.iesvdm.modelo.*;
 import org.iesvdm.service.ClienteService;
 import org.iesvdm.service.ComercialService;
@@ -10,6 +11,7 @@ import org.iesvdm.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -90,11 +92,16 @@ public class ClienteController {
 	}
 
 	@PostMapping("/clientes/crear")
-	public RedirectView submitCrear(@ModelAttribute("cliente") Cliente cliente) {
+	public String submitCrear(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult bindingResult, Model model) {
+
+		if(bindingResult.hasErrors()){
+			model.addAttribute("cliente", cliente);
+			return "crear-cliente"; // Nombre de la vista Thymeleaf sin redirección
+		}
 
 		clienteService.newCliente(cliente);
 
-		return new RedirectView("/clientes") ;
+		return "redirect:/clientes";
 
 	}
 

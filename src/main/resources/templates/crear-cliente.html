@@ -19,13 +19,21 @@
         <!-- Campo Nombre -->
         <div class="mb-3">
             <label for="nombre" class="form-label mt-2">Nombre:</label>
-            <input type="text" id="nombre" th:field="*{nombre}" class="form-control" required />
+            <input type="text" id="nombre" th:field="*{nombre}" class="form-control" />
+            <ul th:if="${#fields.hasErrors('nombre')}">
+                <li th:each="err : ${#fields.errors('nombre')}" th:text="${err}" class="error" />
+            </ul>
+
         </div>
 
         <!-- Campo Apellido1 -->
         <div class="mb-3">
             <label for="apellido1" class="form-label">Primer Apellido:</label>
             <input type="text" id="apellido1" th:field="*{apellido1}" class="form-control" required />
+            <ul th:if="${#fields.hasErrors('apellido1')}">
+                <li th:each="err : ${#fields.errors('apellido1')}" th:text="${err}" class="error" />
+            </ul>
+
         </div>
 
         <!-- Campo Apellido2 -->
@@ -38,12 +46,18 @@
         <div class="mb-3">
             <label for="ciudad" class="form-label">Ciudad:</label>
             <input type="text" id="ciudad" th:field="*{ciudad}" class="form-control" required />
+            <ul th:if="${#fields.hasErrors('ciudad')}">
+                <li th:each="err : ${#fields.errors('ciudad')}" th:text="${err}" class="error" />
+            </ul>
         </div>
 
         <!-- Campo categoria -->
         <div class="mb-3">
             <label for="categoria" class="form-label">Categoría:</label>
             <input type="text" id="categoria" th:field="*{categoria}" class="form-control" required />
+            <ul th:if="${#fields.hasErrors('categoria')}">
+                <li th:each="err : ${#fields.errors('categoria')}" th:text="${err}" class="error" />
+            </ul>
         </div>
 
     </form>
