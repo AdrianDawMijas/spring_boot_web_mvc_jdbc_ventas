@@ -71,6 +71,7 @@ public class ClienteService {
 
 			//Usamos esa lista de pedidos para ir seteando valores
 			clienteDTO.setCantidadPedidos(pedidos.size());
+
 			clienteDTO.setPedidosTrimestre(pedidos.stream()
 					.filter(pedido -> {
 						boolean enUltimoTrimestre = fechaFiltro.estaEnUltimoTrimestre(pedido.getFecha());

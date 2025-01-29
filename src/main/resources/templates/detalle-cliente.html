@@ -9,6 +9,7 @@
 </head>
 <body>
 <div class="container mt-5">
+    <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3">Detalle Cliente</h1>
         <form action="/clientes">
@@ -16,129 +17,58 @@
         </form>
     </div>
 
-    <!-- Campo ID -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">ID</label>
-        <div class="col-sm-10">
-            <input type="text" th:value="${clienteDTO.getCliente().getId()}" class="form-control-plaintext" readonly="readonly" />
-        </div>
-    </div>
-
-    <!-- Campo Nombre -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Nombre</label>
-        <div class="col-sm-10">
-            <input type="text" th:value="${clienteDTO.getCliente().getNombre()}" class="form-control-plaintext" readonly="readonly" />
-        </div>
-    </div>
-
-    <!-- Campo Precio -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Primer Apellido</label>
-        <div class="col-sm-10">
-            <input type="text" th:value="${clienteDTO.getCliente().getApellido1()}" class="form-control-plaintext" readonly="readonly" />
-        </div>
-    </div>
-
-    <!-- Campo ID Fabricante -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Segundo Apellido:</label>
-        <div class="col-sm-10">
-            <input type="text" th:value="${clienteDTO.getCliente().getApellido2()}" class="form-control-plaintext" readonly="readonly" />
-        </div>
-    </div>
-
-    <!-- Campo ID Ciudad -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Ciudad:</label>
-        <div class="col-sm-10">
-            <input type="text" th:value="${clienteDTO.getCliente().getCiudad()}" class="form-control-plaintext" readonly="readonly" />
-        </div>
-    </div>
-
-    <!-- Campo ID Categoria -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Categoria:</label>
-        <div class="col-sm-10">
-            <label>
-                <input type="text" th:value="${clienteDTO.getCliente().getCategoria()}" class="form-control-plaintext" readonly="readonly" />
-            </label>
-        </div>
-    </div>
-
-    <!-- Campo ID Categoria -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Cantidad pedidos ultimo trimestre:</label>
-        <div class="col-sm-10">
-            <label>
-                <input type="text" th:value="${clienteDTO.getPedidosTrimestre()}" class="form-control-plaintext" readonly="readonly" />
-            </label>
-        </div>
-    </div>
-
-    <!-- Campo ID Categoria -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Cantidad pedidos ultimo semestre:</label>
-        <div class="col-sm-10">
-            <label>
-                <input type="text" th:value="${clienteDTO.getPedidosSemestre()}" class="form-control-plaintext" readonly="readonly" />
-            </label>
-        </div>
-    </div>
-
-
-    <!-- Campo ID Categoria -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Cantidad pedidos ultimo año:</label>
-        <div class="col-sm-10">
-            <label>
-                <input type="text" th:value="${clienteDTO.getPedidosAnio()}" class="form-control-plaintext" readonly="readonly" />
-            </label>
-        </div>
-    </div>
-
-
-    <!-- Campo ID Categoria -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Cantidad pedidos ultimo lustro:</label>
-        <div class="col-sm-10">
-            <label>
-                <input type="text" th:value="${clienteDTO.getPedidosLustro()}" class="form-control-plaintext" readonly="readonly" />
-            </label>
-        </div>
-    </div>
-
-
-
-    <!-- Pedidos -->
-    <h2 class="h4 mb-4">Comerciales</h2>
-    <div th:each="dto : ${dtosFilter}">
-        <div class="card mb-4 shadow-sm">
-            <div class="card-body">
-                <!-- Cliente -->
-                <div class="row mb-2">
-                    <div class="col-sm-2 fw-bold">Comercial:</div>
-                    <div class="col-sm-10">
-                        <a th:if="${dto.getComercial() != null}"
-                           th:href="@{/comerciales/{id}(id=${dto.getComercial().getId()})}"
-                           class="text-primary text-decoration-none"
-                           th:text="${dto.getComercial().getNombre()}">
-                        </a>
-                        <span th:if="${dto.getComercial() == null}" class="text-muted">Comercial no disponible</span>
-                    </div>
-                </div>
-                <!-- Total -->
-                <div class="row mb-2">
-                    <div class="col-sm-2 fw-bold">Cantidad Pedidos</div>
-                    <div class="col-sm-10">
-                <span th:text="${dto.getPedidos().size()}"></span>
-                    </div>
+    <!-- Información del Cliente -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Información General</h5>
+                    <p><strong>ID:</strong> <span th:text="${clienteDTO.getCliente().getId()}"></span></p>
+                    <p><strong>Nombre:</strong> <span th:text="${clienteDTO.getCliente().getNombre()}"></span></p>
+                    <p><strong>Primer Apellido:</strong> <span th:text="${clienteDTO.getCliente().getApellido1()}"></span></p>
+                    <p><strong>Segundo Apellido:</strong> <span th:text="${clienteDTO.getCliente().getApellido2()}"></span></p>
+                    <p><strong>Ciudad:</strong> <span th:text="${clienteDTO.getCliente().getCiudad()}"></span></p>
+                    <p><strong>Categoría:</strong> <span th:text="${clienteDTO.getCliente().getCategoria()}"></span></p>
                 </div>
             </div>
         </div>
 
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Pedidos Recientes</h5>
+                    <p><strong>Último Trimestre:</strong> <span th:text="${clienteDTO.getPedidosTrimestre()}"></span></p>
+                    <p><strong>Último Semestre:</strong> <span th:text="${clienteDTO.getPedidosSemestre()}"></span></p>
+                    <p><strong>Último Año:</strong> <span th:text="${clienteDTO.getPedidosAnio()}"></span></p>
+                    <p><strong>Último Lustro:</strong> <span th:text="${clienteDTO.getPedidosLustro()}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-
+    <!-- Comerciales -->
+    <h2 class="h4 text-primary mb-4">Comerciales</h2>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div th:each="dto : ${dtosFilter}" class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-secondary mb-3">Comercial</h5>
+                    <p class="mb-2">
+                        <strong>Nombre:</strong>
+                        <a th:if="${dto.getComercial() != null}"
+                           th:href="@{/comerciales/{id}(id=${dto.getComercial().getId()})}"
+                           class="text-decoration-none text-primary"
+                           th:text="${dto.getComercial().getNombre()}"></a>
+                        <span th:if="${dto.getComercial() == null}" class="text-muted">No disponible</span>
+                    </p>
+                    <p>
+                        <strong>Cantidad Pedidos:</strong>
+                        <span th:text="${dto.getPedidos().size()}"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Bootstrap JS (optional, for interactivity) -->
