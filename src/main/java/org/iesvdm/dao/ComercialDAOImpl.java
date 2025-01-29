@@ -41,7 +41,7 @@ public class ComercialDAOImpl implements ComercialDAO {
 			ps.setString(idx++, comercial.getNombre());
 			ps.setString(idx++, comercial.getApellido1());
 			ps.setString(idx++, comercial.getApellido2());
-			ps.setDouble(idx++, comercial.getComision().doubleValue());
+			ps.setBigDecimal(idx++, comercial.getComision());
 			return ps;
 		},keyHolder);
 

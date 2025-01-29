@@ -20,24 +20,36 @@
         <div class="mb-3">
             <label for="nombre" class="form-label mt-2">Nombre:</label>
             <input type="text" id="nombre" th:field="*{nombre}" class="form-control" required />
+            <ul th:if="${#fields.hasErrors('nombre')}">
+                <li th:each="err : ${#fields.errors('nombre')}" th:text="${err}" class="error" />
+            </ul>
         </div>
 
         <!-- Campo Apellido1 -->
         <div class="mb-3">
             <label for="apellido1" class="form-label">Primer Apellido:</label>
             <input type="text" id="apellido1" th:field="*{apellido1}" class="form-control" required />
+            <ul th:if="${#fields.hasErrors('apellido1')}">
+                <li th:each="err : ${#fields.errors('apellido1')}" th:text="${err}" class="error" />
+            </ul>
         </div>
 
         <!-- Campo Apellido2 -->
         <div class="mb-3">
             <label for="apellido2" class="form-label">Segundo Apellido:</label>
             <input type="text" id="apellido2" th:field="*{apellido2}" class="form-control" required />
+            <ul th:if="${#fields.hasErrors('apellido2')}">
+                <li th:each="err : ${#fields.errors('apellido2')}" th:text="${err}" class="error" />
+            </ul>
         </div>
 
-        <!-- Campo comision -->
+        <!-- Campo Comisión -->
         <div class="mb-3">
-            <label for="comisión" class="form-label">Comisión:</label>
-            <input type="text" id="comisión" th:field="*{comision}" class="form-control" required />
+            <label for="comision" class="form-label">Comisión:</label>
+            <input type="number" step="0.001" id="comision" th:field="*{comision}" class="form-control" required />
+            <ul th:if="${#fields.hasErrors('comision')}">
+                <li th:each="err : ${#fields.errors('comision')}" th:text="${err}" class="text-danger" />
+            </ul>
         </div>
 
     </form>
