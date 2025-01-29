@@ -2,9 +2,12 @@ package org.iesvdm.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import org.iesvdm.Utils.FechaFiltro;
 import org.iesvdm.dao.ClienteDAO;
 import org.iesvdm.modelo.Cliente;
 import org.iesvdm.modelo.ClienteDTO;
+import org.iesvdm.modelo.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,9 @@ public class ClienteService {
 
 	@Autowired
 	private ClienteDAO clienteDAO;
+
+	@Autowired
+	private FechaFiltro fechaFiltro;
 
 	@Autowired
 	private PedidoService pedidoService;
@@ -50,12 +56,45 @@ public class ClienteService {
 
 		List<Cliente> clientes = clienteDAO.getAll();
 		List<ClienteDTO> clientesDTOs = new ArrayList<ClienteDTO>();
+
+
 		for(Cliente cliente : clientes){
 			ClienteDTO clienteDTO = new ClienteDTO();
 			clienteDTO.setCliente(cliente);
-			clienteDTO.setCantidadPedidos(pedidoService.listAll()
+
+			//Seteamos lista de pedidos.
+			clienteDTO.setPedidos(pedidoService.listAll()
 					.stream().filter(pedido -> pedido.getId_cliente()==cliente.getId())
+					.toList());
+
+			List<Pedido> pedidos = clienteDTO.getPedidos();
+
+			//Usamos esa lista de pedidos para ir seteando valores
+			clienteDTO.setCantidadPedidos(pedidos.size());
+			clienteDTO.setPedidosTrimestre(pedidos.stream()
+					.filter(pedido -> {
+						boolean enUltimoTrimestre = fechaFiltro.estaEnUltimoTrimestre(pedido.getFecha());
+						System.out.println("Pedido ID: " + pedido.getId() + ", Fecha: " + pedido.getFecha() + ", En último trimestre: " + enUltimoTrimestre);
+						return enUltimoTrimestre;
+					})
 					.toList().size());
+
+			clienteDTO.setPedidosSemestre(pedidos.stream()
+					.filter(pedido -> fechaFiltro
+							.estaEnUltimoSemestre(pedido.getFecha()))
+					.toList().size());
+
+
+			clienteDTO.setPedidosAnio(pedidos.stream()
+					.filter(pedido -> fechaFiltro
+							.estaEnUltimoAnio(pedido.getFecha()))
+					.toList().size());
+
+			clienteDTO.setPedidosLustro(pedidos.stream()
+					.filter(pedido -> fechaFiltro
+							.estaEnUltimoLustro(pedido.getFecha()))
+					.toList().size());
+
 			clientesDTOs.add(clienteDTO);
 		}
 		return clientesDTOs;

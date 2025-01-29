@@ -20,7 +20,7 @@
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">ID</label>
         <div class="col-sm-10">
-            <input type="text" th:value="${cliente.id}" class="form-control-plaintext" readonly="readonly" />
+            <input type="text" th:value="${clienteDTO.getCliente().getId()}" class="form-control-plaintext" readonly="readonly" />
         </div>
     </div>
 
@@ -28,7 +28,7 @@
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Nombre</label>
         <div class="col-sm-10">
-            <input type="text" th:value="${cliente.nombre}" class="form-control-plaintext" readonly="readonly" />
+            <input type="text" th:value="${clienteDTO.getCliente().getNombre()}" class="form-control-plaintext" readonly="readonly" />
         </div>
     </div>
 
@@ -36,7 +36,7 @@
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Primer Apellido</label>
         <div class="col-sm-10">
-            <input type="text" th:value="${cliente.apellido1}" class="form-control-plaintext" readonly="readonly" />
+            <input type="text" th:value="${clienteDTO.getCliente().getApellido1()}" class="form-control-plaintext" readonly="readonly" />
         </div>
     </div>
 
@@ -44,7 +44,7 @@
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Segundo Apellido:</label>
         <div class="col-sm-10">
-            <input type="text" th:value="${cliente.apellido2}" class="form-control-plaintext" readonly="readonly" />
+            <input type="text" th:value="${clienteDTO.getCliente().getApellido2()}" class="form-control-plaintext" readonly="readonly" />
         </div>
     </div>
 
@@ -52,7 +52,7 @@
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Ciudad:</label>
         <div class="col-sm-10">
-            <input type="text" th:value="${cliente.ciudad}" class="form-control-plaintext" readonly="readonly" />
+            <input type="text" th:value="${clienteDTO.getCliente().getCiudad()}" class="form-control-plaintext" readonly="readonly" />
         </div>
     </div>
 
@@ -61,10 +61,81 @@
         <label class="col-sm-2 col-form-label">Categoria:</label>
         <div class="col-sm-10">
             <label>
-                <input type="text" th:value="${cliente.categoria}" class="form-control-plaintext" readonly="readonly" />
+                <input type="text" th:value="${clienteDTO.getCliente().getCategoria()}" class="form-control-plaintext" readonly="readonly" />
             </label>
         </div>
     </div>
+
+    <!-- Campo ID Categoria -->
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Cantidad pedidos ultimo trimestre:</label>
+        <div class="col-sm-10">
+            <label>
+                <input type="text" th:value="${clienteDTO.getPedidosTrimestre()}" class="form-control-plaintext" readonly="readonly" />
+            </label>
+        </div>
+    </div>
+
+    <!-- Campo ID Categoria -->
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Cantidad pedidos ultimo semestre:</label>
+        <div class="col-sm-10">
+            <label>
+                <input type="text" th:value="${clienteDTO.getPedidosSemestre()}" class="form-control-plaintext" readonly="readonly" />
+            </label>
+        </div>
+    </div>
+
+
+    <!-- Campo ID Categoria -->
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Cantidad pedidos ultimo año:</label>
+        <div class="col-sm-10">
+            <label>
+                <input type="text" th:value="${clienteDTO.getPedidosAnio()}" class="form-control-plaintext" readonly="readonly" />
+            </label>
+        </div>
+    </div>
+
+
+    <!-- Campo ID Categoria -->
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Cantidad pedidos ultimo lustro:</label>
+        <div class="col-sm-10">
+            <label>
+                <input type="text" th:value="${clienteDTO.getPedidosLustro()}" class="form-control-plaintext" readonly="readonly" />
+            </label>
+        </div>
+    </div>
+
+
+
+    <!-- Pedidos -->
+    <h2 class="h4 mb-4">Comerciales</h2>
+    <div th:each="dto : ${dtosFilter}">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <!-- Cliente -->
+                <div class="row mb-2">
+                    <div class="col-sm-2 fw-bold">Comercial:</div>
+                    <div class="col-sm-10">
+                        <a th:if="${dto.getComercial() != null}"
+                           th:href="@{/comerciales/{id}(id=${dto.getComercial().getId()})}"
+                           class="text-primary text-decoration-none"
+                           th:text="${dto.getComercial().getNombre()}">
+                        </a>
+                        <span th:if="${dto.getComercial() == null}" class="text-muted">Comercial no disponible</span>
+                    </div>
+                </div>
+                <!-- Total -->
+                <div class="row mb-2">
+                    <div class="col-sm-2 fw-bold">Cantidad Pedidos</div>
+                    <div class="col-sm-10">
+                <span th:text="${dto.getPedidos().size()}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 

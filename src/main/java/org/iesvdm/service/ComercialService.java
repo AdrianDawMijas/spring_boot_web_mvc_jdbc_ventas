@@ -49,9 +49,13 @@ public class ComercialService {
     }
 
     public List<ComercialDTO> getComercialDTOs(){
+
         List<ComercialDTO> dtos = new ArrayList<>();
+
         List<Comercial> comercials = listAll();
+
         List<PedidoDTO> pedidoDTOs = pedidoService.getPedidoDTOs();
+
         for(Comercial comercial : comercials){
             ComercialDTO dto = new ComercialDTO();
             dto.setComercial(comercial);
