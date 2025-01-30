@@ -17,17 +17,17 @@ public class Cliente {
 	private long id;
 
 	@NotBlank(message = "{error.nombre}")
-	@Size(max = 30, message = "{error.tamano.max}")
+	@Size(max = 30, message = "{error.longitud.max}")
 	private String nombre;
 
 	@NotBlank(message = "{error.nombre}")
-	@Size(max = 30, message = "{error.tamano.max}")
+	@Size(max = 30, message = "{error.longitud.max}")
 	private String apellido1;
 
 	private String apellido2;
 
 	@NotBlank(message = "{error.nombre}")
-	@Size(max = 50, message = "{error.tamano.max}")
+	@Size(max = 50, message = "{error.longitud.max}")
 	private String ciudad;
 
 	@NotNull(message = "{error.nombre}")

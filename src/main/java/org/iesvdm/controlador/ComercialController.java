@@ -30,12 +30,6 @@ public class ComercialController {
     @Autowired
     private ComercialService comercialService;
 
-    @Autowired
-    private PedidoService pedidoService;
-
-    @Autowired
-    private ClienteService clienteService;
-
     @GetMapping("/comerciales")
     public String listar(Model model) {
 
@@ -94,11 +88,15 @@ public class ComercialController {
 
 
     @PostMapping("/comerciales/editar/{id}")
-    public RedirectView submitEditar(@ModelAttribute("comercial") Comercial comercial) {
+    public String submitEditar(@Valid @ModelAttribute("comercial") Comercial comercial, BindingResult bindingResult, Model model) {
 
+        if(bindingResult.hasErrors()){
+            model.addAttribute("comercial",comercial);
+            return "editar-comercial";
+        }
         comercialService.replaceComercial(comercial);
 
-        return new RedirectView("/comerciales");
+        return "redirect:/comerciales";
     }
 
     @PostMapping("/comerciales/borrar/{id}")

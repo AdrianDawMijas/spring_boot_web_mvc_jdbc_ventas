@@ -17,10 +17,10 @@ public class Comercial {
 
 	private int id;
 	@NotBlank(message = "{error.nombre}")
-	@Size(max = 30, message = "{error.tamano.max}")
+	@Size(max = 30, message = "{error.longitud.max}")
 	private String nombre;
 	@NotBlank(message = "{error.nombre}")
-	@Size(max = 30, message = "{error.tamano.max}")
+	@Size(max = 30, message = "{error.longitud.max}")
 	private String apellido1;
 	private String apellido2;
 	@DecimalMin(value = "0.276", message = "La comisión debe ser al menos 0.276")
