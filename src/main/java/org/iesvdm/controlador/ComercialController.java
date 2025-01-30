@@ -107,9 +107,6 @@ public class ComercialController {
         return new RedirectView("/comerciales");
     }
 
-    @GetMapping("/prueba-error")
-    public String pruebaError() {
-        throw new RuntimeException("Esto es un error de prueba.");
-    }
+
 
 }
