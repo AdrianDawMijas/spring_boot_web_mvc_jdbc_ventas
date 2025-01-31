@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -10,115 +10,71 @@
 <body>
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">Detalle Cliente</h1>
+        <h1 class="h3 text-primary">Detalle del Cliente</h1>
         <form action="/clientes">
-            <button class="btn btn-secondary" type="submit">Volver</button>
+            <button class="btn btn-outline-secondary" type="submit">Volver</button>
         </form>
     </div>
 
-    <!-- Campo ID -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">ID</label>
-        <div class="col-sm-10">
-            <input type="text" th:value="${clienteDTO.getCliente().getId()}" class="form-control-plaintext" readonly="readonly" />
+    <div class="card shadow-sm p-4">
+        <h2 class="h5 text-secondary mb-3">Información General</h2>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="fw-bold">ID:</label>
+                <p class="form-control-plaintext" th:text="${clienteDTO.getCliente().getId()}"></p>
+            </div>
+            <div class="col-md-6">
+                <label class="fw-bold">Nombre:</label>
+                <p class="form-control-plaintext" th:text="${clienteDTO.getCliente().getNombre()}"></p>
+            </div>
+            <div class="col-md-6">
+                <label class="fw-bold">Primer Apellido:</label>
+                <p class="form-control-plaintext" th:text="${clienteDTO.getCliente().getApellido1()}"></p>
+            </div>
+            <div class="col-md-6">
+                <label class="fw-bold">Segundo Apellido:</label>
+                <p class="form-control-plaintext" th:text="${clienteDTO.getCliente().getApellido2()}"></p>
+            </div>
+            <div class="col-md-6">
+                <label class="fw-bold">Ciudad:</label>
+                <p class="form-control-plaintext" th:text="${clienteDTO.getCliente().getCiudad()}"></p>
+            </div>
+            <div class="col-md-6">
+                <label class="fw-bold">Categoría:</label>
+                <p class="form-control-plaintext" th:text="${clienteDTO.getCliente().getCategoria()}"></p>
+            </div>
         </div>
     </div>
 
-    <!-- Campo Nombre -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Nombre</label>
-        <div class="col-sm-10">
-            <input type="text" th:value="${clienteDTO.getCliente().getNombre()}" class="form-control-plaintext" readonly="readonly" />
+    <div class="card shadow-sm p-4 mt-4">
+        <h2 class="h5 text-secondary mb-3">Historial de Pedidos</h2>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="fw-bold">Último Trimestre:</label>
+                <p class="form-control-plaintext" th:text="${clienteDTO.getPedidosTrimestre()}"></p>
+            </div>
+            <div class="col-md-6">
+                <label class="fw-bold">Último Semestre:</label>
+                <p class="form-control-plaintext" th:text="${clienteDTO.getPedidosSemestre()}"></p>
+            </div>
+            <div class="col-md-6">
+                <label class="fw-bold">Último Año:</label>
+                <p class="form-control-plaintext" th:text="${clienteDTO.getPedidosAnio()}"></p>
+            </div>
+            <div class="col-md-6">
+                <label class="fw-bold">Último Lustro:</label>
+                <p class="form-control-plaintext" th:text="${clienteDTO.getPedidosLustro()}"></p>
+            </div>
         </div>
     </div>
 
-    <!-- Campo Precio -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Primer Apellido</label>
-        <div class="col-sm-10">
-            <input type="text" th:value="${clienteDTO.getCliente().getApellido1()}" class="form-control-plaintext" readonly="readonly" />
-        </div>
-    </div>
-
-    <!-- Campo ID Fabricante -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Segundo Apellido:</label>
-        <div class="col-sm-10">
-            <input type="text" th:value="${clienteDTO.getCliente().getApellido2()}" class="form-control-plaintext" readonly="readonly" />
-        </div>
-    </div>
-
-    <!-- Campo ID Ciudad -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Ciudad:</label>
-        <div class="col-sm-10">
-            <input type="text" th:value="${clienteDTO.getCliente().getCiudad()}" class="form-control-plaintext" readonly="readonly" />
-        </div>
-    </div>
-
-    <!-- Campo ID Categoria -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Categoria:</label>
-        <div class="col-sm-10">
-            <label>
-                <input type="text" th:value="${clienteDTO.getCliente().getCategoria()}" class="form-control-plaintext" readonly="readonly" />
-            </label>
-        </div>
-    </div>
-
-    <!-- Campo ID Categoria -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Cantidad pedidos ultimo trimestre:</label>
-        <div class="col-sm-10">
-            <label>
-                <input type="text" th:value="${clienteDTO.getPedidosTrimestre()}" class="form-control-plaintext" readonly="readonly" />
-            </label>
-        </div>
-    </div>
-
-    <!-- Campo ID Categoria -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Cantidad pedidos ultimo semestre:</label>
-        <div class="col-sm-10">
-            <label>
-                <input type="text" th:value="${clienteDTO.getPedidosSemestre()}" class="form-control-plaintext" readonly="readonly" />
-            </label>
-        </div>
-    </div>
-
-
-    <!-- Campo ID Categoria -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Cantidad pedidos ultimo año:</label>
-        <div class="col-sm-10">
-            <label>
-                <input type="text" th:value="${clienteDTO.getPedidosAnio()}" class="form-control-plaintext" readonly="readonly" />
-            </label>
-        </div>
-    </div>
-
-
-    <!-- Campo ID Categoria -->
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Cantidad pedidos ultimo lustro:</label>
-        <div class="col-sm-10">
-            <label>
-                <input type="text" th:value="${clienteDTO.getPedidosLustro()}" class="form-control-plaintext" readonly="readonly" />
-            </label>
-        </div>
-    </div>
-
-
-
-    <!-- Pedidos -->
-    <h2 class="h4 mb-4">Comerciales</h2>
-    <div th:each="dto : ${dtosFilter}">
-        <div class="card mb-4 shadow-sm">
+    <h2 class="h4 text-primary mt-5">Comerciales</h2>
+    <div class="row row-cols-2">
+        <div th:each="dto : ${dtosFilter}" class="card shadow-sm mb-4 col">
             <div class="card-body">
-                <!-- Cliente -->
                 <div class="row mb-2">
-                    <div class="col-sm-2 fw-bold">Comercial:</div>
-                    <div class="col-sm-10">
+                    <div class="col-sm-3 fw-bold">Comercial:</div>
+                    <div class="col-sm-9">
                         <a th:if="${dto.getComercial() != null}"
                            th:href="@{/comerciales/{id}(id=${dto.getComercial().getId()})}"
                            class="text-primary text-decoration-none"
@@ -127,21 +83,19 @@
                         <span th:if="${dto.getComercial() == null}" class="text-muted">Comercial no disponible</span>
                     </div>
                 </div>
-                <!-- Total -->
                 <div class="row mb-2">
-                    <div class="col-sm-2 fw-bold">Cantidad Pedidos</div>
-                    <div class="col-sm-10">
-                <span th:text="${dto.getPedidos().size()}"></span>
+                    <div class="col-sm-3 fw-bold">Cantidad de Pedidos:</div>
+                    <div class="col-sm-9">
+                        <span th:text="${dto.getPedidos().size()}"></span>
                     </div>
                 </div>
             </div>
         </div>
-
-
+    </div>
 
 </div>
 
-<!-- Bootstrap JS (optional, for interactivity) -->
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

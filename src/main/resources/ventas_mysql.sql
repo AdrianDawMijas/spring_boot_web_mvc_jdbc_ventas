@@ -29,6 +29,8 @@ CREATE TABLE pedido (
                         FOREIGN KEY (id_comercial) REFERENCES comercial(id)
 );
 
+SELECT distinct cliente.nombre, cliente.apellido1, cliente.apellido2, cliente.ciudad, cliente.categoría, p.total, p.fecha from cliente left outer join pedido p on cliente.id = p.id_cliente;
+
 INSERT INTO cliente VALUES(1, 'Aarón', 'Rivero', 'Gómez', 'Almería', 100);
 INSERT INTO cliente VALUES(2, 'Adela', 'Salas', 'Díaz', 'Granada', 200);
 INSERT INTO cliente VALUES(3, 'Adolfo', 'Rubio', 'Flores', 'Sevilla', NULL);

@@ -48,6 +48,8 @@ public class PedidoService {
 
     }
 
+
+
     public List<PedidoDTO> getPedidoDTOs(){
         List<Pedido> pedidos = listAll();
         List<PedidoDTO> dtos = new ArrayList<PedidoDTO>();

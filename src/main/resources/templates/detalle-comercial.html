@@ -60,45 +60,52 @@
     </div>
 
     <!-- Pedidos -->
-    <h2 class="h4 mb-4">Pedidos</h2>
-    <div th:if="${dto != null and dto.getPedidos() != null}" th:each="pedido : ${dto.getPedidos()}">
-        <div class="card mb-4 shadow-sm">
-            <div class="card-body">
-                <!-- Cliente -->
-                <div class="row mb-2">
-                    <div class="col-sm-2 fw-bold">Cliente:</div>
-                    <div class="col-sm-10">
-                        <a th:if="${pedido.getCliente() != null}"
-                           th:href="@{/clientes/{id}(id=${pedido.getCliente().getId()})}"
-                           class="text-primary text-decoration-none"
-                           th:text="${pedido.getCliente().getNombre()}">
-                        </a>
-                        <span th:if="${pedido.getCliente() == null}" class="text-muted">Cliente no disponible</span>
-                    </div>
-                </div>
-                <!-- Total -->
-                <div class="row mb-2">
-                    <div class="col-sm-2 fw-bold">Total:</div>
-                    <div class="col-sm-10">
-                <span th:class="${pedido.getPedido().getTotal() == dto.getMaximo() ? 'bg-success' :
-                  (pedido.getPedido().getTotal() == dto.getMinimo() ? 'bg-warning' : 'bg-white')}"
-                      th:text="${pedido.getPedido().getTotal()}"></span>
-                    </div>
-                </div>
-                <!-- Fecha -->
-                <div class="row">
-                    <div class="col-sm-2 fw-bold">Fecha:</div>
-                    <div class="col-sm-10">
-                        <span th:text="${pedido.getPedido().getFecha()}"></span>
+    <div class="container-fluid">
+        <h2 class="h4 mb-4 text-primary">Pedidos</h2>
+        <div th:if="${dto != null and dto.getPedidos() != null}" class="row row-cols-1 row-cols-md-2 g-4">
+            <div th:each="pedido : ${dto.getPedidos()}" class="col">
+                <div class="card border-0 shadow-sm rounded-3">
+                    <div class="card-body">
+                        <!-- Cliente -->
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-bold text-secondary">Cliente:</div>
+                            <div class="col-sm-9">
+                                <a th:if="${pedido.getCliente() != null}"
+                                   th:href="@{/clientes/{id}(id=${pedido.getCliente().getId()})}"
+                                   class="text-primary fw-semibold text-decoration-none"
+                                   th:text="${pedido.getCliente().getNombre()}">
+                                </a>
+                                <span th:if="${pedido.getCliente() == null}" class="text-muted fst-italic">Cliente no disponible</span>
+                            </div>
+                        </div>
+
+                        <!-- Total -->
+                        <div class="row mb-3">
+                            <div class="col-sm-3 fw-bold text-secondary">Total:</div>
+                            <div class="col-sm-9">
+                            <span class="px-3 py-1 rounded-pill text-white fw-semibold"
+                                  th:classappend="${pedido.getPedido().getTotal() == dto.getMaximo() ? 'bg-success' :
+                                    (pedido.getPedido().getTotal() == dto.getMinimo() ? 'bg-warning' : 'bg-secondary')}"
+                                  th:text="${pedido.getPedido().getTotal()}">
+                            </span>
+                            </div>
+                        </div>
+
+                        <!-- Fecha -->
+                        <div class="row">
+                            <div class="col-sm-3 fw-bold text-secondary">Fecha:</div>
+                            <div class="col-sm-9">
+                                <span class="text-dark" th:text="${pedido.getPedido().getFecha()}"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- Leyenda -->
-    <div class="mt-4">
+    <div class="mt-4 justify-content-center">
         <h5 class="fw-bold">Leyenda:</h5>
         <ul class="list-inline">
             <li class="list-inline-item">
@@ -110,6 +117,7 @@
         </ul>
     </div>
 </div>
+
 
 <!-- Bootstrap JS (optional, for interactivity) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
